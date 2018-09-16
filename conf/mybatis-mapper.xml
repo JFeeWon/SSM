@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="index">
+	<select id="showAllSc" parameterType="java.lang.String" resultType="java.util.Map">		
+		SELECT
+			S.STU_NAME,
+			SBJ.SUBJECT_NAME,
+			SC.SCORE
+		FROM
+			STUDENT S
+		RIGHT JOIN STUDENT_SCORE SC ON SC.STU_ID = S.STU_ID
+		LEFT JOIN SUBJECT SBJ ON SC.SUBJECT_ID = SBJ.SUBJECT_ID			
+		<if test="where!=null and where!=''">
+			WHERE
+		S.STU_NAME=#{where}	
+		</if>
+		
+		ORDER BY
+			S.STU_NAME 
+		
+	</select>
+
+</mapper>
